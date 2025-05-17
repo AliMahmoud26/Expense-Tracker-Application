@@ -5,28 +5,43 @@ import HeaderImage from "../../public/header_3.webp";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 
 export default function Home() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    const savedEmail = localStorage.getItem('authEmail');
-    const savedPassword = localStorage.getItem('authPassword');
+    const checkAuth = () => {
+      const token = getCookie('authToken');
+      const savedEmail = localStorage.getItem('authEmail');
+      const savedPassword = localStorage.getItem('authPassword');
+  
+      if (savedEmail && savedPassword) {
+        setEmail(savedEmail);
+        setPassword(savedPassword);
+        setRememberMe(true);
+      }
 
-    if (savedEmail && savedPassword) {
-      setEmail(savedEmail);
-      setPassword(savedPassword);
-      setRememberMe(true);
+      if (token) {
+        router.push('/dashboard');
+      } else if (savedEmail && savedPassword) {
+        handleAutoLogin(savedEmail, savedPassword);
+      } else {
+        setIsLoading(false);
+      }
     }
-  }, [])
+
+    checkAuth();
+  }, [router])
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const validEmail = 'alihelal.eng@yahoo.com';
     const validPassword = 'alihelal123';
@@ -45,8 +60,41 @@ export default function Home() {
       router.push('/dashboard');
     } else {
       setError('Invalid credentials. Please try again.');
+      setIsLoading(false);
     }
   }
+
+  // Optional: Auto-login function
+  const handleAutoLogin = async (savedEmail, savedPassword) => {
+    try {
+      // Replace with your actual validation logic
+      const validEmail = 'alihelal.eng@yahoo.com';
+      const validPassword = 'alihelal123';
+
+      if (savedEmail === validEmail && savedPassword === validPassword) {
+        const token = 'auto-login-token-' + Date.now();
+        setCookie('authToken', token, { maxAge: 60 * 60 * 24 });
+        router.push('/dashboard');
+      } else {
+        // Clear invalid saved credentials
+        localStorage.removeItem('rememberedEmail');
+        localStorage.removeItem('rememberedPassword');
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.error('Auto-login failed:', error);
+      setIsLoading(false);
+    }
+  };
+
+   if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-800"></div>
+      </div>
+    );
+  }
+
   return (
     <>
       <main className="flex mx-[6rem]">
