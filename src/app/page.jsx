@@ -31,7 +31,7 @@ export default function Home() {
                   <label htmlFor="remember-me" className="text-[.875rem]">Remember Me</label>
                 </div>
               </form>
-                <button className="mt-[1rem] bg-cyan-800 text-white py-[0.5rem] px-[6rem] w-100 duration-500 ease-in-out hover:bg-cyan-600 cursor-pointer"><Link href="/dashboard">Login</Link></button>
+                <Link href="/dashboard"><button className="mt-[1rem] bg-cyan-800 text-white py-[0.5rem] px-[6rem] w-100 duration-500 ease-in-out hover:bg-cyan-600 cursor-pointer">Login</button></Link>
                 <p className="mt-[1rem] text-[0.875rem]">Don't have an account? <Link href="/signup"><span className="text-cyan-600 underline">SignUp</span></Link></p>
             </div>
           </nav>
