@@ -39,27 +39,55 @@ export default function Home() {
     checkAuth();
   }, [router])
 
-  const handleSubmit = (e) => {
+  // useEffect(() => {
+  //   let timeoutId;
+  //   if (isLoading) {
+  //     timeoutId = setTimeout(() => {
+  //       setShowLoading(true);
+  //     }, 3000);
+  //   } else {
+  //     setShowLoading(false);
+  //   }
+
+  //   return () => {
+  //     clearTimeout(timeoutId);
+  //   };
+  // }, [isLoading]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    const validEmail = 'alihelal.eng@yahoo.com';
-    const validPassword = 'alihelal123';
+    const minLoadingTime = new Promise(resolve => setTimeout(resolve, 3000));
 
-    if (rememberMe) {
-      localStorage.setItem('authEmail', email);
-      localStorage.setItem('authPassword', password)
-    } else {
-      localStorage.removeItem('authEmail');
-      localStorage.removeItem('authPassword');
-    }
+    try {
+      const validEmail = 'alihelal.eng@yahoo.com';
+      const validPassword = 'alihelal123';
 
-    if (email === validEmail && password === validPassword) {
-      const token = 'sample-token-12345';
-      setCookie('authToken', token, {maxAge: 60 * 60 * 24}); // The token will expire in 1 day
-      router.push('/dashboard');
-    } else {
-      setError('Invalid credentials. Please try again.');
+      if (rememberMe) {
+        localStorage.setItem('authEmail', email);
+        localStorage.setItem('authPassword', password);
+      } else {
+        localStorage.removeItem('authEmail');
+        localStorage.removeItem('authPassword');
+      }
+
+      if (email === validEmail && password === validPassword) {
+        const token = 'sample-token-12345';
+        setCookie('authToken', token, { maxAge: 60 * 60 * 24 });
+        
+        // Wait for both auth and minimum loading time
+        await minLoadingTime;
+        router.push('/dashboard');
+      } else {
+        await minLoadingTime;
+        setError('Invalid credentials. Please try again.');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      await minLoadingTime;
+      setError('An error occurred. Please try again.');
+    } finally {
       setIsLoading(false);
     }
   }
@@ -87,7 +115,7 @@ export default function Home() {
     }
   };
 
-   if (isLoading) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-800"></div>

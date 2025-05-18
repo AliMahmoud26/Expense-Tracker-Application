@@ -5,10 +5,13 @@ import {useState} from 'react'
 import Dashboard_Logo from '../../../../../public/profile_image.jpg';
 import { FaChevronLeft, FaChartBar, FaCog, FaShieldAlt, FaQuestionCircle, FaHome, FaWallet, FaSignOutAlt } from 'react-icons/fa';
 import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { deleteCookie } from 'cookies-next';
 
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
   
   const menuItems = [
     {
@@ -41,19 +44,27 @@ const Sidebar = () => {
         icon: <FaShieldAlt />,
         href: '/dashboard/privacy'
     },
-    {
-        name: "Logout",
-        icon: <FaSignOutAlt />,
-        href: '/dashboard/logout'
-    },
     ]
 
-  const handleItemClick = (item) => {
-    setActiveItem(item);
-  }
+  // const handleItemClick = (item) => {
+  //   setActiveItem(item);
+  // }
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
+  }
+
+  const handleLogout = () => {
+    deleteCookie('authToken');
+
+    // Clear local storage
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('authEmail');
+      localStorage.removeItem('authPassword');
+    }
+
+    // Return to login page
+    router.push('/');
   }
 
   return (
@@ -78,7 +89,7 @@ const Sidebar = () => {
                 href={item.href}
                 className={`text-[1.125rem] mb-3 p-2 cursor-pointer font-semibold rounded-lg duration-500 flex items-center gap-3
                 ${pathname === item.href ? 'bg-sky-500 text-white translate-x-[5px]' : 'text-cyan-800 hover:text-sky-500 hover:bg-gray-200 hover:translate-x-[5px]'}
-                ${isCollapsed ? 'w-[40px]' : 'w-40'} overflow-hidden transition-all duration-300`}
+                ${isCollapsed ? 'w-8.5' : 'w-40'} overflow-hidden transition-all duration-300`}
               >
                 <span>{item.icon}</span>
                 <span className={`${isCollapsed ? 'hidden' : 'whitespace-nowrap'}`}>{item.name}</span>
@@ -86,6 +97,10 @@ const Sidebar = () => {
             </li>
           ))}
         </ul>
+
+        <button
+        onClick={handleLogout} 
+        className='duration-600 ease-in-out text-cyan-800 hover:text-white p-2 hover:bg-sky-500 flex items-center justify-center gap-[0.25rem] cursor-pointer font-bold'><FaSignOutAlt />{!isCollapsed && 'Logout'}</button>
       </nav>
     </aside>
   )
