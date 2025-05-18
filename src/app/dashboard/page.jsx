@@ -2,6 +2,7 @@
 import { FaArrowRight, FaWallet } from 'react-icons/fa';
 import { dashboardData, recentTransactions, pieChartData } from '../data/Data';
 import PieChartComponent from '../components/PieChart';
+import Link from 'next/link';
 
 const Dashboard = () => {
   return (
@@ -26,13 +27,15 @@ const Dashboard = () => {
 
       {/* Transactions and Pie Chart Section */}
       <section className="flex flex-col lg:flex-row gap-6 w-full">
-        {/* Recent Transactions (50% width) */}
+        {/* Recent Transactions Component */}
         <div className="w-full lg:w-[49%] bg-white shadow-sm shadow-black/20 p-8 rounded-lg">
           <div className="flex justify-between items-center mb-8">
             <h1 className='font-bold text-xl text-gray-800'>Recent Transactions</h1>
-            <button className='flex items-center gap-2 bg-gray-200 rounded-sm py-2 px-5 text-sm text-cyan-800 cursor-pointer'>
+            <Link href='/dashboard/income'>
+              <button className='flex items-center gap-2 bg-gray-200 rounded-sm py-2 px-5 text-sm text-cyan-800 cursor-pointer'>
               See All <FaArrowRight />
-            </button>
+              </button>
+            </Link>
           </div>
           {recentTransactions.map((transaction) => (
             <div 
@@ -55,7 +58,7 @@ const Dashboard = () => {
           ))}
         </div>
 
-        {/* Pie Chart (50% width) */}
+        {/* Pie Chart Component */}
         <div className="w-full lg:w-[49%] bg-white shadow-sm shadow-black/20 p-8 rounded-lg">
           <h2 className="text-xl font-bold text-gray-800 mb-6">Financial Overview</h2>
           <div className="h-[400px] w-full">

@@ -3,7 +3,7 @@ import { FaBox, FaChartBar, FaLightbulb, FaMoneyBillWave, FaPiggyBank, FaShoppin
 export const dashboardData = [
     {
         id: 1,
-        icon: <FaBox className="text-2xl text-white" />,
+        icon: <FaWallet className="text-2xl text-white" />,
         title: 'Total Balance',
         amount: 10050,
         iconBgColor: 'bg-purple-400',
@@ -11,7 +11,7 @@ export const dashboardData = [
     },
     {
         id:2,
-        icon: <FaWallet className="text-2xl text-white" />,
+        icon: <FaMoneyBillWave className="text-2xl text-white" />,
         title: 'Total Income',
         amount: 12400,
         iconBgColor: 'bg-orange-400',
