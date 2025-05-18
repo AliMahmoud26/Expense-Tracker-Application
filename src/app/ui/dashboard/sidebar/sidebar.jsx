@@ -71,11 +71,11 @@ const Sidebar = () => {
     <aside className={`h-screen ${isCollapsed ? 'w-[80px]' : 'w-[250px]'}`}>
       <nav className='h-full flex flex-col bg-white border-r border-gray-200 shadow-sm'>
         <div className='flex justify-between items-center p-[20px] border-gray-200 border-b-1 mb-[30px] cursor-pointer'>
-          <Link href='/dashboard' className="flex items-center gap-1">
+          <Link href='/dashboard' className="flex flex-col items-center gap-1 mx-auto">
             {!isCollapsed && (
-              <Image src={Dashboard_Logo} alt='Dashboard-Logo' width={50} height={50} />
+              <Image src={Dashboard_Logo} alt='Dashboard-Logo' width={70} height={70} />
             )}
-            {!isCollapsed && <span className='text-[1rem]'>Welcome Ali</span>}
+            {!isCollapsed && <span className='text-[1.125rem]'>Ali Mahmoud</span>}
           </Link>
           <button onClick={toggleSidebar} className='ml-[5px] p-2 text-[.875rem] rounded-lg text-sky-500 bg-gray-100 duration-400 ease-in-out cursor-pointer hover:bg-gray-200'>
             <FaChevronLeft className={`${isCollapsed ? 'rotate-180' : ''}`} />
