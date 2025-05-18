@@ -58,7 +58,7 @@ const Dashboard = () => {
         {/* Pie Chart (50% width) */}
         <div className="w-full lg:w-[49%] bg-white shadow-sm shadow-black/20 p-8 rounded-lg">
           <h2 className="text-xl font-bold text-gray-800 mb-6">Financial Overview</h2>
-          <div className="h-[400px]">
+          <div className="h-[400px] w-full">
             <PieChartComponent data={pieChartData} />
           </div>
         </div>

@@ -3,7 +3,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recha
 
 const PieChartComponent = ({ data }) => {
   return (
-    <div className="w-full">
+    <div className="w-full h-[400px]">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
