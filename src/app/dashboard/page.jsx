@@ -1,19 +1,34 @@
 'use client';
 import { FaArrowRight, FaWallet } from 'react-icons/fa';
-import { dashboardData, pieChartData } from '../data/Data';
 import PieChartComponent from '../components/PieChart';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const Dashboard = () => {
   const [recentTransactions, setRecentTransactions] = useState([]);
+  const [totals, setTotals] = useState({
+    balance: 0,
+    income: 0,
+    expenses: 0
+  });
 
-  // Load transactions from localStorage
+  // Load transactions and calculate totals from localStorage
   useEffect(() => {
     const loadTransactions = () => {
       const incomeSources = JSON.parse(localStorage.getItem('incomeSources')) || [];
       const expenseSources = JSON.parse(localStorage.getItem('expenseSources')) || [];
       
+      // Calculate totals
+      const totalIncome = incomeSources.reduce((sum, item) => sum + item.amount, 0);
+      const totalExpenses = expenseSources.reduce((sum, item) => sum + item.amount, 0);
+      const balance = totalIncome - totalExpenses;
+
+      setTotals({
+        balance,
+        income: totalIncome,
+        expenses: totalExpenses
+      });
+
       // Combine and sort by date (newest first)
       const allTransactions = [...incomeSources, ...expenseSources]
         .map(transaction => ({
@@ -37,6 +52,31 @@ const Dashboard = () => {
     };
   }, []);
 
+  // Dashboard cards data
+  const dashboardData = [
+    {
+      id: 1,
+      title: "Total Balance",
+      amount: totals.balance,
+      icon: <FaWallet className="text-white" />,
+      iconBgColor: "bg-cyan-600"
+    },
+    {
+      id: 2,
+      title: "Total Income",
+      amount: totals.income,
+      icon: <span className="text-white">↑</span>,
+      iconBgColor: "bg-green-500"
+    },
+    {
+      id: 3,
+      title: "Total Expenses",
+      amount: totals.expenses,
+      icon: <span className="text-white">↓</span>,
+      iconBgColor: "bg-red-500"
+    }
+  ];
+
   return (
     <main className="w-full px-4 mx-auto max-w-[1800px]">
       {/* Stats Cards Section */}
@@ -46,12 +86,17 @@ const Dashboard = () => {
             className="flex items-center gap-4 bg-white shadow-sm shadow-black/20 w-full py-6 pl-4 rounded-lg" 
             key={item.id}
           >
-            <div className={`bg-cyan-600 p-4 rounded-full ${item.iconBgColor || ''}`}>
+            <div className={`${item.iconBgColor} p-4 rounded-full`}>
               {item.icon}
             </div>
             <div>
               <h2 className="mb-1 font-bold text-cyan-800 tracking-wide">{item.title}</h2>
-              <p className="text-2xl">${item.amount.toLocaleString()}</p>
+              <p className="text-2xl">
+                ${item.amount.toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2
+                })}
+              </p>
             </div>
           </div>
         ))}
@@ -85,7 +130,10 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <p className={`py-1 px-3 rounded-sm text-sm ${transaction.textBgColor || ''} ${transaction.textColor || ''}`}>
-                  ${transaction.amount.toLocaleString()}
+                  ${transaction.amount.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                  })}
                 </p>
               </div>
             ))
@@ -100,7 +148,7 @@ const Dashboard = () => {
         <div className="w-full lg:w-[49%] bg-white shadow-sm shadow-black/20 p-8 rounded-lg">
           <h2 className="text-xl font-bold text-gray-800 mb-6">Financial Overview</h2>
           <div className="h-[400px] w-full">
-            <PieChartComponent data={pieChartData} />
+            <PieChartComponent />
           </div>
         </div>
       </section>
