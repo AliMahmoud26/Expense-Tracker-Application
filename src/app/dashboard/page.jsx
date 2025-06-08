@@ -65,14 +65,14 @@ const Dashboard = () => {
       id: 2,
       title: "Total Income",
       amount: totals.income,
-      icon: <span className="text-white">↑</span>,
+      icon: <FaMoneyBillWave className="text-2xl text-white" />,
       iconBgColor: "bg-green-500"
     },
     {
       id: 3,
       title: "Total Expenses",
       amount: totals.expenses,
-      icon: <span className="text-white">↓</span>,
+      icon: <FaPiggyBank className="text-2xl text-white" />,
       iconBgColor: "bg-red-500"
     }
   ];
@@ -91,12 +91,12 @@ const Dashboard = () => {
             </div>
             <div>
               <h2 className="mb-1 font-bold text-cyan-800 tracking-wide">{item.title}</h2>
-              <p className="text-2xl">
+              {/* <p className="text-2xl">
                 ${item.amount.toLocaleString(undefined, {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2
                 })}
-              </p>
+              </p> */}
             </div>
           </div>
         ))}
