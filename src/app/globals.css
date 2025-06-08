@@ -6,3 +6,13 @@ body {
   font-family: "Inter", sans-serif;
   font-weight: 400;
 }
+
+/* Add this to your global CSS */
+.crud {
+  z-index: 10;
+}
+
+/* The overlay should be behind the CRUD but above other content */
+.bg-overlay {
+  z-index: 5;
+}
