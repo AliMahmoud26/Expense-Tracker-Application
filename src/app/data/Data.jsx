@@ -131,53 +131,53 @@ export const expenseTrends = [
 ];
 
 // Income Sources
-export const incomeSources = [
-    {
-        id: 1,
-        icon : <FaSuitcase className="" />,
-        title: 'Salary',
-        date: '28th April 2025',
-        amount: '12400',
-        type: 'income',
-        iconColor: 'text-cyan-800',
-        textColor: 'text-green-600',
-        textBgColor: 'bg-green-200',
-    },
-    {
-        id: 2,
-        icon : <FaSuitcase className="" />,
-        title: 'Salary',
-        date: '28th April 2025',
-        amount: '12400',
-        type: 'income',
-        iconColor: 'text-cyan-800',
-        textColor: 'text-green-600',
-        textBgColor: 'bg-green-200',
-    },
-]
+// export const incomeSources = [
+//     {
+//         id: 1,
+//         icon : <FaSuitcase className="" />,
+//         title: 'Salary',
+//         date: '28th April 2025',
+//         amount: '12400',
+//         type: 'income',
+//         iconColor: 'text-cyan-800',
+//         textColor: 'text-green-600',
+//         textBgColor: 'bg-green-200',
+//     },
+//     {
+//         id: 2,
+//         icon : <FaSuitcase className="" />,
+//         title: 'Salary',
+//         date: '28th April 2025',
+//         amount: '12400',
+//         type: 'income',
+//         iconColor: 'text-cyan-800',
+//         textColor: 'text-green-600',
+//         textBgColor: 'bg-green-200',
+//     },
+// ]
 
 // Expense Sources
-export const expenseSources = [
-    {
-        id: 1,
-        icon : <FaShoppingBag className="" />,
-        title: 'Shopping',
-        date: '3rd May 2025',
-        amount: '-$1000',
-        type: 'expense',
-        iconColor: 'text-cyan-800',
-        textColor: 'text-red-600',
-        textBgColor: 'bg-red-200',
-    },
-    {
-        id: 2,
-        icon : <FaBox className="" />,
-        title: 'DSL Bill',
-        date: '2nd May 2025',
-        amount: '-$500',
-        type: 'expense',
-        iconColor: 'text-cyan-800',
-        textColor: 'text-red-600',
-        textBgColor: 'bg-red-200',
-    },
-]
+// export const expenseSources = [
+//     {
+//         id: 1,
+//         icon : <FaShoppingBag className="" />,
+//         title: 'Shopping',
+//         date: '3rd May 2025',
+//         amount: '-$1000',
+//         type: 'expense',
+//         iconColor: 'text-cyan-800',
+//         textColor: 'text-red-600',
+//         textBgColor: 'bg-red-200',
+//     },
+//     {
+//         id: 2,
+//         icon : <FaBox className="" />,
+//         title: 'DSL Bill',
+//         date: '2nd May 2025',
+//         amount: '-$500',
+//         type: 'expense',
+//         iconColor: 'text-cyan-800',
+//         textColor: 'text-red-600',
+//         textBgColor: 'bg-red-200',
+//     },
+// ]
