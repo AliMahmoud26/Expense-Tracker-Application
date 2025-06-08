@@ -91,12 +91,12 @@ const Dashboard = () => {
             </div>
             <div>
               <h2 className="mb-1 font-bold text-cyan-800 tracking-wide">{item.title}</h2>
-              {/* <p className="text-2xl">
+              <p className="text-2xl">
                 ${item.amount.toLocaleString(undefined, {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2
                 })}
-              </p> */}
+              </p>
             </div>
           </div>
         ))}
