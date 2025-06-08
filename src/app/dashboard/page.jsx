@@ -1,5 +1,5 @@
 'use client';
-import { FaArrowRight, FaWallet } from 'react-icons/fa';
+import { FaArrowRight, FaMoneyBillWave, FaPiggyBank, FaWallet } from 'react-icons/fa';
 import PieChartComponent from '../components/PieChart';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
